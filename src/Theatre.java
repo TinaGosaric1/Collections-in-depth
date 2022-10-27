@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Theatre {
     private final String theatreName;
-    private Collection<Seat> seats = new ArrayList<>();
+    private List<Seat> seats = new ArrayList<>();
 
     public Theatre(String theatreName, int numRows, int seatsPerRow) {
         this.theatreName = theatreName;
@@ -21,20 +21,14 @@ public class Theatre {
     }
 
     public boolean reserveSeat(String seatNumber){
-        Seat requestedSeat = null;
-        for(Seat seat : seats){
-            System.out.print(".");
-            if(seat.getSeatNumber().equals(seatNumber)){
-                requestedSeat = seat;
-                break;
-            }
-        }
-
-        if(requestedSeat == null){
-            System.out.println("There is no seat " + seatNumber);
+        Seat requestedSeat = new Seat(seatNumber);
+        int foundSeat = Collections.binarySearch(seats, requestedSeat, null); // returns position of an object in a sorted list
+        if(foundSeat >= 0){
+            return seats.get(foundSeat).reserve();
+        } else {
+            System.out.println("There is no seat.");
             return false;
         }
-        return requestedSeat.reserve();
     }
 
     // for testing
