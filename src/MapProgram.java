@@ -13,5 +13,16 @@ public class MapProgram {
         System.out.println(languages.get("Java"));
         languages.put("Java","this course is about java");
         System.out.println(languages.get("Java")); //the first value is overriden, because we entered the same key
+
+        if(languages.replace("Lisp", "Therein lies madness.", "A functional programming language with imperative features.")){
+            System.out.println("Lisp was replaced");
+        }
+            else {
+                System.out.println("Lisp was not replaced");
+            }
+
+        for(String key: languages.keySet()){
+            System.out.println(key + " : " + languages.get(key));
+        }
     }
 }
